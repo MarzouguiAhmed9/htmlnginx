@@ -2,7 +2,7 @@
 FROM nginx:latest
 
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY index.html /usr/share/nginx/index.html
 
 # Expose port 80 (default HTTP port)
 EXPOSE 80
