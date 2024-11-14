@@ -28,7 +28,7 @@ pipeline {
                     sh 'docker ps -q --filter "name=$DOCKER_IMAGE" | xargs -r docker stop | xargs -r docker rm'
 
                     // Run the Docker container with the built image
-                    sh 'docker run -d -p 8080:80 --name $DOCKER_IMAGE $DOCKER_IMAGE:$DOCKER_TAG'
+                    sh 'docker run -d -p 8085:80 --name $DOCKER_IMAGE $DOCKER_IMAGE:$DOCKER_TAG'
                 }
             }
         }
