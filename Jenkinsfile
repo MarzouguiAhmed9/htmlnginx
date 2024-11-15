@@ -34,11 +34,6 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // Clean up any remaining containers or images, even if the pipeline fails
-            sh 'docker ps -q --filter "name=$DOCKER_IMAGE" | xargs -r docker stop | xargs -r docker rm'
-            sh 'docker images -q $DOCKER_IMAGE | xargs -r docker rmi'
-        }
-    }
+
 }
+
