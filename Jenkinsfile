@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'my-nginx-app'  // Name for the Docker image
         DOCKER_TAG = 'latest'  // Tag for the Docker image
-        DOCKER_HOST = 'tcp://localhost:8444'  // Docker Desktop Docker daemon URL (Make sure Docker Desktop is set to expose the daemon)
+        DOCKER_HOST = 'tcp://localhost:2376'  // Docker Desktop Docker daemon URL (Make sure Docker Desktop is set to expose the daemon)
     }
 
     stages {
