@@ -1,38 +1,33 @@
 pipeline {
-    agent any
+    agent any  // Specify the type of agent to run the pipeline (could be 'docker', 'node', etc.)
 
-    environment {
-        DOCKER_IMAGE = 'my-nginx-app'  // Name for the Docker image
-        DOCKER_TAG = 'latest'  // Tag for the Docker image
-        DOCKER_HOST = 'tcp://localhost:2376'  // Docker Desktop Docker daemon URL (Make sure Docker Desktop is set to expose the daemon)
-    }
+   
 
     stages {
-        stage('Checkout Repository') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh '''
-                    export DOCKER_CLI_EXPERIMENTAL=enabled
-                    docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
-                    '''
+                    // Build Docker image using the Dockerfile
+                    sh 'docker build -t "myimageng"  .'
                 }
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Run Nginx Container') {
             steps {
                 script {
-                    sh '''
-                    docker ps -q --filter "name=$DOCKER_IMAGE" | xargs -r docker stop | xargs -r docker rm
-                    docker run -d -p 8085:80 --name $DOCKER_IMAGE $DOCKER_IMAGE:$DOCKER_TAG
-                    '''
+                    // Run Docker container with Nginx
+                    sh 'docker run -d -p 80:80 myimage'
                 }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up Docker resources after build
+            script {
+                sh 'docker system prune -f'  // Remove unused Docker resources
             }
         }
     }
