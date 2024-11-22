@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image using the Dockerfile
-                    sh 'docker build -t "myimageng"  .'
+                    sh 'docker build -t "myimage"  .'
                 }
             }
         }
@@ -18,6 +18,7 @@ pipeline {
                 script {
                     // Run Docker container with Nginx
                     sh 'docker run -d -p 80:80 myimage'
+                    
                 }
             }
         }
