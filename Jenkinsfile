@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     // Run Docker container with Nginx
-                    sh 'docker run -d -p 80:80 myimage'
+                    sh 'docker run -d -p 8089:80 myimage'
                     
                 }
             }
